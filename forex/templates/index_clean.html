@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Forex Prediction</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h1>Foreign Currency Exchange Rate Prediction</h1>
+    
+    <form method="POST">
+        <label>Select Currency Pair:</label>
+        <select name="pair">
+            <option value="usdinr">USD/INR</option>
+            <option value="usdjpy">USD/JPY</option>
+            <option value="usdcny">USD/CNY</option>
+            <option value="usdkor">USD/KRW</option>
+        </select>
+        <button type="submit">Predict</button>
+    </form>
+    
+    {% if prediction %}
+        <p>Predicted Rate: {{ "%.4f"|format(prediction) }}</p>
+        <p>Last Updated: {{ timestamp }}</p>
+        <img src="{{ url_for('static', filename=request.form.pair + '_plot.png') }}" alt="Actual vs Predicted">
+    {% endif %}
+</body>
+</html>
